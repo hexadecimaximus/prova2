@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Prova 2 - Estruturas de Dados FATEC
+# Copyright (c) 2026 Rodrigo de Freitas
+# SPDX-License-Identifier: MIT
+
 from abc import ABC, abstractmethod
 
 class AbstractStructure(ABC):

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Prova 2 - Estruturas de Dados FATEC
+# Copyright (c) 2026 Rodrigo de Freitas
+# SPDX-License-Identifier: MIT
+
 import sys
 
 from list_struct import List
