@@ -4,13 +4,12 @@
 # Copyright (c) 2026 Rodrigo de Freitas
 # SPDX-License-Identifier: MIT
 
-
 """ TODO
 - : min()
 - : max()
 - : sum()
-- função que retorna a média dos elementos da lista: avg()
-- função que retorna a quantidade de elemento da lista: len()
+- : avg()
+- : len()
 
 2.
 - função que concatene uma segunda lista no final da sua lista principal: append(outra_lista)
@@ -78,7 +77,7 @@ class List:
         """
         função que retorna a soma dos elementos da lista
         """
-
+        
         # função anônima responsável pela soma
         somar = lambda a, b: a + b
 
@@ -90,5 +89,30 @@ class List:
             aux = aux.prox
 
         return total
+
+    def len(self):
+        """
+        função que retorna a quantidade de elemento da lista
+        """
+        total = 0
+        aux = self.cabeca
+
+        while aux:
+            total += 1
+            aux = aux.prox
+
+        return total
+
+    def avg(self):
+        """
+        função que retorna a média dos elementos da lista
+        """
+        tamanho = self.len()
+
+        if tamanho == 0:
+            raise ValueError("Não é possível calcular a média de uma lista vazia.")
+
+        return self.sum() / tamanho
+
         
 
