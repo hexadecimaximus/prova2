@@ -42,7 +42,7 @@ def main():
     metodo = sys.argv[2]
 
     try:
-        # Converte os argumentos após a estrutura e o método em inteiros.
+        # Converte os valores após a estrutura e o método em inteiros.
         valores = [int(arg) for arg in sys.argv[3:]]
     except ValueError:
         print("Erro: os valores devem ser números inteiros.")
