@@ -4,19 +4,6 @@
 # Copyright (c) 2026 Rodrigo de Freitas
 # SPDX-License-Identifier: MIT
 
-""" TODO
-- : min()
-- : max()
-- : sum()
-- : avg()
-- : len()
-
-2.
-- função que concatene uma segunda lista no final da sua lista principal: append(outra_lista)
-- (*
-"""
-
-
 from node import Node
 
 class List:
