@@ -11,9 +11,9 @@ from stack_struct import Stack
 from queue_struct import Queue
 
 estruturas = {
-    "list": List,
-    "stack": Stack,
-    "queue": Queue,
+    "--list": List,
+    "--stack": Stack,
+    "--queue": Queue,
 }
 
 def mostrar_ajuda():
@@ -29,6 +29,30 @@ def mostrar_ajuda():
     print("  main.py --stack --buscar 1 2 3 4 5")
 
 def main():
+    metodos_lista = {
+        "--min": "min",
+        "--max": "max",
+        "--sum": "sum",
+        "--avg": "avg",
+        "--len": "len",
+        "--reverse": "reverse",
+    }
+
+    metodos_pilha = {
+        "--buscar": "buscar",
+        "--editar": "editar",
+        "--remover": "remover",
+        "--remover_repetidos": "remover_repetidos",
+    }
+
+    metodos_fila = {
+        "--imprimir_fila": "imprimir_fila",
+        "--buscar": "buscar",
+        "--editar": "editar",
+        "--remover": "remover",
+        "--remover_repetidos": "remover_repetidos",
+    }
+
     if len(sys.argv) == 2 and sys.argv[1] in ("--help", "-h"):
         mostrar_ajuda()
         return
@@ -48,7 +72,31 @@ def main():
         print("Erro: os valores devem ser números inteiros.")
         return
     
-    #TODO - Instanciar a estrutura solicitada e inserir os valores.
+    #Instancia a estrutura solicitada e insere os valores.
+    if estrutura not in estruturas:
+        print(f"Erro: estrutura '{estrutura}' inválida.")
+        return
+
+    if estrutura == "--list":
+        metodos = metodos_lista
+    elif estrutura == "--stack":
+        metodos = metodos_pilha
+    elif estrutura == "--queue":
+        metodos = metodos_fila
+
+    if metodo not in metodos:
+        print(f"Erro: método '{metodo}' inválido para {estrutura}.")
+        return
+
+    instancia = estruturas[estrutura]()
+
+    for valor in valores:
+        instancia.inserir_lista(valor)
+
+    funcao = getattr(instancia, metodos[metodo])
+    resultado = funcao()
+
+    print(resultado)
 
 if __name__ == "__main__":
     main()
