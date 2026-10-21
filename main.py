@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: MIT
 
 import sys
-
+from typing import Optional, Union # se Python for superior a 3.10, não precisa dessa linha
 from list_struct import List
 from stack_struct import Stack
 from queue_struct import Queue

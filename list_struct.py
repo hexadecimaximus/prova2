@@ -7,7 +7,7 @@
 from node import Node
 from typing import Optional, Union # se Python for superior a 3.10, não precisa dessa linha
 
-class List:
+class List():
     def __init__(self):
         self.cabeca = None
 
