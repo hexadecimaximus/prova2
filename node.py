@@ -9,5 +9,5 @@ class Node:
         self.dado = dado
         self.prox = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.dado)

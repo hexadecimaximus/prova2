@@ -5,18 +5,19 @@
 # SPDX-License-Identifier: MIT
 
 from node import Node
+from typing import Optional, Union # se Python for superior a 3.10, não precisa dessa linha
 
 class List:
     def __init__(self):
         self.cabeca = None
 
-    def esta_vazia(self):
+    def esta_vazia(self) -> bool:
         if self.cabeca:
             return False
         else:
             return True
 
-    def inserir_lista(self, dado):
+    def inserir_lista(self, dado: Union[int, str]) -> None:
         """
         insere dados no início da lista
         """
@@ -24,7 +25,7 @@ class List:
         novo.prox = self.cabeca
         self.cabeca = novo
 
-    def min(self):
+    def min(self) -> int:
         """
         função que retorna o menor elemento da lista
         """
@@ -42,7 +43,7 @@ class List:
 
         return min_value
 
-    def max(self):
+    def max(self) -> int:
         """
         função que retorna o maior elemento da lista
         """
@@ -60,7 +61,7 @@ class List:
         
         return max_value
 
-    def sum(self):
+    def sum(self) -> int:
         """
         função que retorna a soma dos elementos da lista
         """
@@ -77,7 +78,7 @@ class List:
 
         return total
 
-    def len(self):
+    def len(self) -> int:
         """
         função que retorna a quantidade de elemento da lista
         """
@@ -90,7 +91,7 @@ class List:
 
         return total
 
-    def avg(self):
+    def avg(self) -> float:
         """
         função que retorna a média dos elementos da lista
         """
@@ -101,7 +102,7 @@ class List:
 
         return self.sum() / tamanho
 
-    def reverse(self):
+    def reverse(self) -> None:
         """
         função que inverte uma lista
         Nota: como os itens são inseridos no início da lista,
@@ -116,7 +117,7 @@ class List:
             aux = aux.prox
 
 
-    def append(self, args):
+    def append(self, args: list[str]) -> None:
         """
         Concatena os valores, ignorando o separador '--'.
         """
