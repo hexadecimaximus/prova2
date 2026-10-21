@@ -36,6 +36,7 @@ def main():
         "--avg": "avg",
         "--len": "len",
         "--reverse": "reverse",
+        "--append": "append",
     }
 
     metodos_pilha = {

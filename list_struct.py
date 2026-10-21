@@ -13,7 +13,7 @@
 
 2.
 - função que concatene uma segunda lista no final da sua lista principal: append(outra_lista)
-- função que inverta uma lista: reverse(*
+- (*
 """
 
 
@@ -113,6 +113,18 @@ class List:
             raise ValueError("Não é possível calcular a média de uma lista vazia.")
 
         return self.sum() / tamanho
+
+    def reverse(self):
+        """
+        função que inverte uma lista
+        Nota: como os ítens são inseridos no começo da lista, na verdade
+        essa lista só faz percorrer e imprimir a lista :P
+        """
+        aux = self.cabeca
+
+        while aux:
+            print(aux.dado, end=" ")
+            aux = aux.prox
 
         
 
