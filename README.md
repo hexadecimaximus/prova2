@@ -46,6 +46,6 @@ __Aviso:__ nenhum TAD foi poupado do trabalho manual durante a elaboração dest
 Eventuais bugs, por outro lado, continuam em liberdade e não demonstraram qualquer 
 arrependimento.
 
-[!WARNING]
-Desenvolvido em sistemas Unix-like. Fazer funcionar em outros sistemas operacionais é uma 
-_side quest_ que não está no escopo deste sofrimento acadêmico.
+> [!WARNING]
+> Desenvolvido em sistemas Unix-like. Fazer funcionar em outros sistemas operacionais é 
+> uma  _side quest_ que não está no escopo deste sofrimento acadêmico.
