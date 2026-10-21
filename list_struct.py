@@ -117,8 +117,10 @@ class List:
     def reverse(self):
         """
         função que inverte uma lista
-        Nota: como os ítens são inseridos no começo da lista, na verdade
-        essa lista só faz percorrer e imprimir a lista :P
+        Nota: como os itens são inseridos no início da lista,
+        a ordem dos elementos já está invertida em relação
+        à sequência de inserção. Portanto, basta percorrer
+        e imprimir os nós. :P
         """
         aux = self.cabeca
 
