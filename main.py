@@ -68,7 +68,10 @@ def main():
 
     try:
         # Converte os valores após a estrutura e o método em inteiros.
-        valores = [int(arg) for arg in sys.argv[3:]]
+        if metodo == "--append":
+            valores = sys.argv[3:]
+        else:
+            valores = [int(arg) for arg in sys.argv[3:]]
     except ValueError:
         print("Erro: os valores devem ser números inteiros.")
         return
@@ -89,15 +92,34 @@ def main():
         print(f"Erro: método '{metodo}' inválido para {estrutura}.")
         return
 
+
     instancia = estruturas[estrutura]()
 
-    for valor in valores:
-        instancia.inserir_lista(valor)
-
     funcao = getattr(instancia, metodos[metodo])
-    resultado = funcao()
 
-    print(resultado)
+    if metodo == "--append":
+        if "--" not in valores:
+            print("Erro: o método --append exige o separador '--'.")
+            print("Uso: main.py --list --append <valores> -- <valores>")
+            return
+
+        if valores == ["--"] or valores[0] == "--" or valores[-1] == "--":
+            print("Erro: informe valores inteiros antes e depois de '--'.")
+            print("Uso: main.py --list --append <valores> -- <valores>")
+            return
+
+        try:
+            funcao(valores)
+        except ValueError as erro:
+            print(f"Erro: {erro}")
+            return
+    else:
+        for valor in valores:
+            instancia.inserir_lista(valor)
+
+        resultado = funcao()
+        print(resultado)
+
 
 if __name__ == "__main__":
     main()

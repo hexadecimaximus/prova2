@@ -128,5 +128,29 @@ class List:
             print(aux.dado, end=" ")
             aux = aux.prox
 
-        
+
+    def append(self, args):
+        """
+        Concatena os valores, ignorando o separador '--'.
+        """
+        if not args:
+            raise ValueError("Informe os valores para concatenar.")
+
+        for valor in reversed(args):
+            if valor != "--":
+                self.inserir_lista(valor)
+
+        aux = self.cabeca
+
+        while aux:
+            print(aux.dado, end="")
+
+            aux = aux.prox
+
+            if aux:
+                print("", end="")
+
+        print()
+
+            
 
