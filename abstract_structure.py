@@ -8,10 +8,10 @@ from abc import ABC, abstractmethod
 
 class AbstractStructure(ABC):
     """
-    Stack e Queue compartilham dos mesmos métodos: buscar, editar e remover.
+    Stack e Queue compartilham dos mesmos métodos: buscar, editar, remover.
     Mas cada classe implementará o seu (override) de acordo com suas necessidades
     """
-    
+
     @abstractmethod
     def buscar(self, info: int) -> bool:
         pass
