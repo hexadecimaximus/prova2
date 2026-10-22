@@ -4,14 +4,6 @@
 # Copyright (c) 2026 Rodrigo de Freitas
 # SPDX-License-Identifier: MIT
 
-"""
-TODO
-- função que busque um elemento de uma pilha. buscar(info)
-- função que edite um elemento de uma pilha. editar(info)
-- função que busque e remova um elemento de uma pilha. remover(info)
-- função que remova a todos os valores repetidos de uma pilha. remover_repetidos()
-"""
-
 from node import Node
 from abstract_structure import AbstractStructure
 from typing_extensions import override # necessário para decorators override
@@ -29,8 +21,6 @@ class Stack(AbstractStructure):
         novo = Node(dado)
         novo.prox = self.topo
         self.topo = novo
-
-
 
     @override
     def buscar(self, info: int) -> bool:
@@ -66,8 +56,52 @@ class Stack(AbstractStructure):
             aux = aux.prox
 
         return False
-
+    
     @override
     def remover(self, info: int) -> bool:
-        raise NotImplementedError("Método ainda não implementado.")
+        """
+        Busca e remove um elemento da pilha.
+        Retorna True se removido; caso contrário, False.
+        main.py --stack --remover <elements> -- <valor_a_ser_removido>
+        Ex: main.py --stack --remover 1 2 3 4 5 6 -- 3 (remove o valor 3)
+        """
+        aux = self.topo
+        anterior = None
+
+        while aux:
+            if aux.dado == info:
+                if anterior is None:
+                    self.topo = aux.prox
+                else:
+                    anterior.prox = aux.prox
+
+                return True
+
+            anterior = aux
+            aux = aux.prox
+
+        return False
+
+    def remover_repetidos(self) -> None:
+        """
+        Remove os valores repetidos da pilha,
+        preservando a primeira ocorrência encontrada a partir do topo.
+        Ex:  main.py --stack --remover_repetidos 10 20 30 20 40 10 (removerá os números repetidos)
+        """
+        atual = self.topo
+
+        while atual:
+            anterior = atual
+            aux = atual.prox
+
+            while aux:
+                if aux.dado == atual.dado:
+                    anterior.prox = aux.prox
+                    aux = anterior.prox
+                else:
+                    anterior = aux
+                    aux = aux.prox
+
+            atual = atual.prox
+
 
