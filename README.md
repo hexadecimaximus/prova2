@@ -49,3 +49,6 @@ arrependimento.
 > [!WARNING]
 > Desenvolvido em sistemas Unix-like. Fazer funcionar em outros sistemas operacionais é 
 > uma  _side quest_ que não está no escopo deste sofrimento acadêmico.
+
+### Required
+Desenvolvido em Slackware 15.0, com Python Python 3.10.9 Anaconda 23.3.1
