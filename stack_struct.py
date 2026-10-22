@@ -52,6 +52,9 @@ class Stack(AbstractStructure):
         """
         Busca um elemento na pilha e altera seu valor.
         Retorna True se editado; caso contrário, False.
+        Forma de uso:
+        main.py --stack --editar <list> -- <valor_antigo> <novo_valor>
+        Ex: main.py --stack --editar 1 2 3 4 5 6 -- 3 6 (altera o valor de 3 para 6)
         """
         aux = self.topo
 
