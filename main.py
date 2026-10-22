@@ -4,20 +4,17 @@
 # Copyright (c) 2026 Rodrigo de Freitas
 # SPDX-License-Identifier: MIT
 
-
 import sys
 
 from list_struct import List
 from stack_struct import Stack
 from queue_struct import Queue
 
-
 estruturas = {
     "--list": List,
     "--stack": Stack,
     "--queue": Queue,
 }
-
 
 def mostrar_ajuda():
     print("Uso: main.py <estrutura> <método> [valores...]")
@@ -33,7 +30,6 @@ def mostrar_ajuda():
     print("  main.py --list --append abc def -- ghi jkl")
     print("  main.py --stack --buscar 10 20 30 -- 20")
     print("  main.py --queue --remover 10 20 30 -- 20")
-
 
 def main():
     metodos = {
@@ -170,11 +166,20 @@ def main():
 
         elif metodo == "--editar":
             resultado = funcao(info, novo_info)
-            if resultado is not None:
-                print(resultado)
+            if resultado:
+                print(f"Elemento {info} alterado para {novo_info}.")
+                
+                # percorre a pilha, mostrando o dado editado/alterado
+                aux = instancia.topo
+                while aux:
+                    print(aux.dado, end=" ")
+                    aux = aux.prox
+                print()
+            else:
+                print(f"Elemento {info} não encontrado. Nenhuma alteração realizada.")
 
         elif metodo == "--remover":
-            resultado = funcao(info)
+            resultado = funcao(info, novo)
             if resultado is not None:
                 print(resultado)
 
