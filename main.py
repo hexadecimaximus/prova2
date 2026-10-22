@@ -179,9 +179,18 @@ def main():
                 print(f"Elemento {info} não encontrado. Nenhuma alteração realizada.")
 
         elif metodo == "--remover":
-            resultado = funcao(info, novo)
-            if resultado is not None:
-                print(resultado)
+            resultado = funcao(info)
+            if resultado:
+                print(f"Elemento {info} removido da pilha.")
+
+                aux = instancia.topo
+                while aux:
+                    print(aux.dado, end=" ")
+                    aux = aux.prox
+                print()
+
+            else:
+                print(f"Elemento {info} não encontrado. Nenhuma remoção realizada.")
 
         elif metodo == "--imprimir_fila" or metodo == "--reverse":
             funcao()
