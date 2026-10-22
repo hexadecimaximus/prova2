@@ -197,9 +197,12 @@ def main():
 
         elif metodo == "--remover_repetidos":
             resultado = funcao()
-            if resultado is not None:
-                print(resultado)
-
+    
+            aux = instancia.topo
+            while aux:
+                print(aux.dado, end=" ")
+                aux = aux.prox
+            print()
         else:
             resultado = funcao()
             print(resultado)
