@@ -30,6 +30,8 @@ class Stack(AbstractStructure):
         novo.prox = self.topo
         self.topo = novo
 
+
+
     @override
     def buscar(self, info: int) -> bool:
         """
@@ -47,7 +49,20 @@ class Stack(AbstractStructure):
     
     @override
     def editar(self, info: int, novo_info: int) -> bool:
-        raise NotImplementedError("Método ainda não implementado.")
+        """
+        Busca um elemento na pilha e altera seu valor.
+        Retorna True se editado; caso contrário, False.
+        """
+        aux = self.topo
+
+        while aux:
+            if aux.dado == info:
+                aux.dado = novo_info
+                return True
+
+            aux = aux.prox
+
+        return False
 
     @override
     def remover(self, info: int) -> bool:
