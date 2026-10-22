@@ -4,10 +4,13 @@
 # Copyright (c) 2026 Rodrigo de Freitas
 # SPDX-License-Identifier: MIT
 
+
 import sys
+
 from list_struct import List
 from stack_struct import Stack
 from queue_struct import Queue
+
 
 estruturas = {
     "--list": List,
@@ -27,33 +30,35 @@ def mostrar_ajuda():
     print("Exemplos:")
     print("  main.py --list --min 1 2 3 4 5")
     print("  main.py --list --sum 10 20 30")
+    print("  main.py --list --append abc def -- ghi jkl")
     print("  main.py --stack --buscar 10 20 30 -- 20")
+    print("  main.py --queue --remover 10 20 30 -- 20")
 
 
 def main():
-    metodos_lista = {
-        "--min": "min",
-        "--max": "max",
-        "--sum": "sum",
-        "--avg": "avg",
-        "--len": "len",
-        "--reverse": "reverse",
-        "--append": "append",
-    }
-
-    metodos_pilha = {
-        "--buscar": "buscar",
-        "--editar": "editar",
-        "--remover": "remover",
-        "--remover_repetidos": "remover_repetidos",
-    }
-
-    metodos_fila = {
-        "--imprimir_fila": "imprimir_fila",
-        "--buscar": "buscar",
-        "--editar": "editar",
-        "--remover": "remover",
-        "--remover_repetidos": "remover_repetidos",
+    metodos = {
+        "--list": {
+            "--min": "min",
+            "--max": "max",
+            "--sum": "sum",
+            "--avg": "avg",
+            "--len": "len",
+            "--append": "append",
+            "--reverse": "reverse",
+        },
+        "--stack": {
+            "--buscar": "buscar",
+            "--editar": "editar",
+            "--remover": "remover",
+            "--remover_repetidos": "remover_repetidos",
+        },
+        "--queue": {
+            "--imprimir_fila": "imprimir_fila",
+            "--buscar": "buscar",
+            "--editar": "editar",
+            "--remover": "remover",
+            "--remover_repetidos": "remover_repetidos",
+        },
     }
 
     if len(sys.argv) == 2 and sys.argv[1] in ("--help", "-h"):
@@ -61,100 +66,134 @@ def main():
         return
 
     if len(sys.argv) < 3:
-        print("Uso: main.py <estrutura> <método> <valores...>")
-        print("Use main.py --help ou -h para consultar os comandos disponíveis.")
+        mostrar_ajuda()
         return
 
     estrutura = sys.argv[1]
     metodo = sys.argv[2]
+    argumentos = sys.argv[3:]
 
     if estrutura not in estruturas:
         print(f"Erro: estrutura '{estrutura}' inválida.")
         return
 
-    if estrutura == "--list":
-        metodos = metodos_lista
-    elif estrutura == "--stack":
-        metodos = metodos_pilha
-    else:
-        metodos = metodos_fila
-
-    if metodo not in metodos:
+    if metodo not in metodos[estrutura]:
         print(f"Erro: método '{metodo}' inválido para {estrutura}.")
         return
 
-    argumentos = sys.argv[3:]
-    info_busca = None
+    valores = []
+    info = None
+    novo_info = None
 
     try:
         if metodo == "--append":
+            if (
+                "--" not in argumentos
+                or argumentos.index("--") == 0
+                or argumentos.index("--") == len(argumentos) - 1
+            ):
+                raise ValueError(
+                    "Informe valores antes e depois do separador '--'."
+                )
+
             valores = argumentos
 
-            if "--" not in valores:
-                print("Erro: o método --append exige o separador '--'.")
-                print("Uso: main.py --list --append <valores> -- <valores>")
-                return
+        elif estrutura in ("--stack", "--queue"):
+            if metodo in ("--buscar", "--editar", "--remover"):
+                if "--" not in argumentos:
+                    raise ValueError(
+                        "Separe os elementos dos argumentos da operação usando '--'."
+                    )
 
-            if (
-                valores == ["--"]
-                or valores[0] == "--"
-                or valores[-1] == "--"
-            ):
-                print("Erro: informe valores antes e depois de '--'.")
-                print("Uso: main.py --list --append <valores> -- <valores>")
-                return
+                separador = argumentos.index("--")
+                elementos = argumentos[:separador]
+                operacao = argumentos[separador + 1:]
 
-        elif metodo == "--buscar":
-            if "--" not in argumentos:
-                print("Erro: separe os elementos do valor procurado com '--'.")
-                print("Uso: main.py --stack --buscar <elementos> -- <valor>")
-                return
+                if not elementos:
+                    raise ValueError("Informe os elementos da estrutura.")
 
-            separador = argumentos.index("--")
-            elementos = argumentos[:separador]
-            procurado = argumentos[separador + 1:]
+                if metodo in ("--buscar", "--remover") and len(operacao) != 1:
+                    raise ValueError("Informe exatamente um valor após '--'.")
 
-            if not elementos or len(procurado) != 1:
-                print("Erro: informe os elementos e exatamente um valor para buscar.")
-                print("Uso: main.py --stack --buscar <elementos> -- <valor>")
-                return
+                if metodo == "--editar" and len(operacao) != 2:
+                    raise ValueError(
+                        "Informe o valor a editar e o novo valor após '--'."
+                    )
 
-            valores = [int(arg) for arg in elementos]
-            info_busca = int(procurado[0])
+                valores = [int(valor) for valor in elementos]
+
+                if metodo == "--editar":
+                    info = int(operacao[0])
+                    novo_info = int(operacao[1])
+                elif metodo in ("--buscar", "--remover"):
+                    info = int(operacao[0])
+
+            else:
+                if "--" in argumentos:
+                    raise ValueError(
+                        "Não use '--' nesta operação."
+                    )
+
+                valores = [int(valor) for valor in argumentos]
 
         else:
-            valores = [int(arg) for arg in argumentos]
+            valores = [int(valor) for valor in argumentos]
 
-    except ValueError:
-        print("Erro: os valores devem ser números inteiros.")
+    except ValueError as erro:
+        print(f"Erro: {erro}")
         return
 
     instancia = estruturas[estrutura]()
-    funcao = getattr(instancia, metodos[metodo])
 
-    if metodo == "--append":
-        try:
-            funcao(valores)
-        except ValueError as erro:
-            print(f"Erro: {erro}")
-        return
+    # Prepara a estrutura antes de executar a operação.
+    if metodo != "--append":
+        for valor in valores:
+            if estrutura == "--list":
+                instancia.inserir_lista(valor)
+            elif estrutura == "--stack":
+                instancia.empilhar(valor)
+            elif estrutura == "--queue":
+                instancia.enfileirar(valor)
 
-    # Mantém a inserção usada pelo código original.
-    # Confira se Stack e Queue também possuem inserir_lista().
-    for valor in valores:
-        instancia.inserir_lista(valor)
+    funcao = getattr(instancia, metodos[estrutura][metodo])
 
-    if metodo == "--buscar":
-        resultado = funcao(info_busca)
+    try:
+        if metodo == "--append":
+            resultado = funcao(valores)
 
-        if resultado:
-            print(f"Elemento {info_busca} encontrado.")
+        elif metodo == "--buscar":
+            resultado = funcao(info)
+            if resultado:
+                print(f"Elemento {info} encontrado.")
+            else:
+                print(f"Elemento {info} não encontrado.")
+
+        elif metodo == "--editar":
+            resultado = funcao(info, novo_info)
+            if resultado is not None:
+                print(resultado)
+
+        elif metodo == "--remover":
+            resultado = funcao(info)
+            if resultado is not None:
+                print(resultado)
+
+        elif metodo == "--imprimir_fila" or metodo == "--reverse":
+            funcao()
+
+        elif metodo == "--remover_repetidos":
+            resultado = funcao()
+            if resultado is not None:
+                print(resultado)
+
         else:
-            print(f"Elemento {info_busca} não encontrado.")
-    else:
-        resultado = funcao()
-        print(resultado)
+            resultado = funcao()
+            print(resultado)
+
+    except (ValueError, NotImplementedError) as erro:
+        print(f"Erro: {erro}")
 
 
 if __name__ == "__main__":
     main()
+
