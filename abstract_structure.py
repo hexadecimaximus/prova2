@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 
 class AbstractStructure(ABC):
     """
-    Stack e Queue compartilham dos mesmos métodos: buscar, editar, remover.
+    Stack e Queue compartilham dos mesmos métodos: buscar, editar, remover e remover_repetidos.
     Mas cada classe implementará o seu (override) de acordo com suas necessidades
     """
 
