@@ -168,9 +168,12 @@ def main():
             resultado = funcao(info, novo_info)
             if resultado:
                 print(f"Elemento {info} alterado para {novo_info}.")
+
+                if estrutura == "--stack":
+                    aux = instancia.topo
+                else:
+                    aux = instancia.inicio
                 
-                # percorre a pilha, mostrando o dado editado/alterado
-                aux = instancia.topo
                 while aux:
                     print(aux.dado, end=" ")
                     aux = aux.prox
@@ -181,7 +184,7 @@ def main():
         elif metodo == "--remover":
             resultado = funcao(info)
             if resultado:
-                print(f"Elemento {info} removido da pilha.")
+                print(f"Elemento {info} removido da estrutura.")
 
                 aux = instancia.topo
                 while aux:
@@ -198,7 +201,11 @@ def main():
         elif metodo == "--remover_repetidos":
             resultado = funcao()
     
-            aux = instancia.topo
+            if estrutura == "--stack":
+                aux = instancia.topo
+            else:
+                aux = instancia.inicio
+                
             while aux:
                 print(aux.dado, end=" ")
                 aux = aux.prox
