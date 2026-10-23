@@ -82,6 +82,7 @@ class Stack(AbstractStructure):
 
         return False
 
+    @override
     def remover_repetidos(self) -> None:
         """
         Remove os valores repetidos da pilha,

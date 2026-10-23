@@ -23,3 +23,7 @@ class AbstractStructure(ABC):
     @abstractmethod
     def remover(self, info: int) -> bool:
         pass
+
+    @abstractmethod
+    def remover_repetidos(self) -> None:
+        pass 
