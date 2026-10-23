@@ -4,15 +4,6 @@
 # Copyright (c) 2026 Rodrigo de Freitas
 # SPDX-License-Identifier: MIT
 
-"""
-TODO
-- imprimir uma fila: imprimir_fila()
-- buscar elemento da fila: buscar(info)
-- editar um elemento da fila: editar(info)
-- buscar e remover um elemento da fila: remover(info)
-- remover todas as repetições da fila: remover_repetidos()
-"""
-
 from node import Node
 from abstract_structure import AbstractStructure
 from typing_extensions import override # necessário para decorators override
